@@ -4,7 +4,12 @@ const Bread = require('../models/bread.js')
 
 // INDEX
 breads.get('/', (req, res) => {
-    res.send(Bread)
+    res.render('index',
+        {
+            breads: Bread // We pull this key of data from line 3 which is the js file that links from the bread.js file which contains the data for the bread
+        }
+    )
+    // res.send(Bread)
 })
 
 // Show
