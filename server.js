@@ -13,6 +13,8 @@ const app = express();
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+// Adds css
+app.use(express.static('public'))
 
 // Routes
 app.get('/', (req, res) =>{
@@ -30,3 +32,8 @@ app.listen(PORT, ()=>{
 const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
 
+
+// 404 Page Not Found
+app.get('*', (req, res) =>{
+    res.send('404')
+})
