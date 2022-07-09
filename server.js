@@ -13,6 +13,9 @@ const app = express();
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+// Middle warefrom Express that allows us to change strings into a object. Is being used in the /controllers/js Create method
+app.use(express.urlencoded({extended: true}))
+
 // Adds css
 app.use(express.static('public'))
 
