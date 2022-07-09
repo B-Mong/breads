@@ -6,7 +6,8 @@ const Bread = require('../models/bread.js')
 breads.get('/', (req, res) => {
     res.render('index',
         {
-            breads: Bread // We pull this key of data from line 3 which is the js file that links from the bread.js file which contains the data for the bread
+            breads: Bread, // We pull this key of data from line 3 which is the js file that links from the bread.js file which contains the data for the bread
+            title: 'Index Page'
         }
     )
     // res.send(Bread)
