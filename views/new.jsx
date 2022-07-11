@@ -1,4 +1,4 @@
-// new.jsx creates a form for our user to enter new details about a new bread
+// new.jsx creates a form for our user to enter new details about a new bread. Once the user submits it will POST/CREATE a page with the details from this form
 const React = require('react')
 const Default = require('./layouts/Default')
 
@@ -14,7 +14,7 @@ function New() {
                     id="name"
                     required
                 />
-                <label htmlFor="image">Image</label>
+                <label htmlFor="image">Image URL</label>
                 <input
                     type="text"
                     name="image"
