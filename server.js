@@ -4,6 +4,8 @@ const express = require('express');
 require('dotenv').config();
 const PORT = process.env.PORT
 const app = express();
+// DEPENDENCIES
+const methodOverride = require('method-override')
 
 
 // MIDDLEWARE (View engine we are using)
@@ -13,6 +15,9 @@ app.engine('jsx', require('express-react-views').createEngine())
 // Middle warefrom Express that allows us to change strings into a object. Is being used in the /controllers/js Create method
 // When data is being sent over, it gets encrypted and needs to be changed into a object for the next thing to use
 app.use(express.urlencoded({extended: true}))
+// Allows us to override methods when making making requests. We are using this to force a form to make a delete request since they only make POST requests
+app.use(methodOverride('_method'))
+
 
 
 

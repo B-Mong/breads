@@ -24,7 +24,8 @@ breads.get('/new', (req, res) => {
 breads.get('/:arrayIndex', (req, res) => {
     if (Bread[req.params.arrayIndex]) {
         res.render('Show', {
-            bread: Bread[req.params.arrayIndex]
+            bread: Bread[req.params.arrayIndex],
+            index: req.params.arrayIndex,
         })
     } else {
         res.render('error404')
@@ -46,4 +47,9 @@ breads.post('/', (req, res) => {
     res.redirect('/breads') // Once it pushes the new array, it redirects the user to the bread list, they will be able to see their bread on the list
 })
 
+// DELETE
+breads.delete('/:indexArray', (req, res) => {
+    Bread.splice(req.param.indexArray, 1)
+    res.status(303).redirect('/breads')
+})
 module.exports = breads
