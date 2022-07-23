@@ -41,8 +41,10 @@ breads.get('/:id/edit', (req, res) => {
 // Show // Gets data and display it on the Show.jsx html template. 
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
+        .populate('baker')
         .then(foundBread => {
             const bakedBy = foundBread.getBakedBy()
+            console.log(bakedBy)
             res.render('show', {
                 bread: foundBread
             })

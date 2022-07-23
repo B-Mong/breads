@@ -11,12 +11,14 @@ const breadSchema = new Schema({
         type: Schema.Types.ObjectID,
         ref: 'Baker'
     }
+
 })
 
 // helper methods 
 breadSchema.methods.getBakedBy = function () {
     return `${this.name} was baked with love by ${this.baker}`
 }
+
 
 
 // model and export
