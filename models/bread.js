@@ -6,10 +6,21 @@ const { Schema } = mongoose
 const breadSchema = new Schema({
     name: { type: String, required: true },
     hasGluten: Boolean,
-    image: { type: String, default: 'http://placehold.it/500x500.png' }
+    image: { type: String, default: 'http://placehold.it/500x500.png' },
+    baker: {
+        type: String,
+        enum: ['Rachel', 'Monica', 'Joey', 'Ross', 'Phoebe']
+    }
 })
+
+// helper methods 
+breadSchema.methods.getBakedBy = function () {
+    return `${this.name} was baked with love by ${this.baker}`
+}
+
 
 // model and export
 // equates a variable to the schema we created. Allowing us to access this db as a variable
 const Bread = mongoose.model('Bread', breadSchema)
 module.exports = Bread
+
