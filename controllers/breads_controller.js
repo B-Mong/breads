@@ -5,17 +5,21 @@ const breads = express.Router()
 const Bread = require('../models/bread.js')
 const Baker = require('../models/baker.js')
 
-// INDEX // Basic READ/GET function 
+// INDEX // Basic READ/GET function // Bakers are now also display on this page
 breads.get('/', (req, res) => {
-    Bread.find()
+    Baker.find()
+    .then(foundBakers => {
+        Bread.find()
         .then(foundBreads => {
             res.render('index',
                 {
                     breads: foundBreads,
-                    title: 'Bread List'
+                    bakers: foundBakers,
+                    title: 'Index Page'
                 }
             )
         })
+    })
 })
 
 // NEW // GET request since we are getting a form. We are not using POST yet since we are not changing anything in the list, only filling out a form 
