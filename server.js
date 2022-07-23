@@ -47,6 +47,10 @@ app.listen(PORT, () => {
 const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
 
+// Bakers
+const bakersController = require('./controllers/bakers_controller.js')
+app.use('/bakers', bakersController)
+
 // * is used as a catch all for all other routes that were not specified/created. Meaning we can display and create our own 404 page
 // 404 Page Not Found
 app.get('*', (req, res) => {
