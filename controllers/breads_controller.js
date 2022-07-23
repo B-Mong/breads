@@ -3,8 +3,9 @@ const express = require('express')
 const breads = express.Router()
 // Equates our data from the model folder to a variable so we can access it in this file
 const Bread = require('../models/bread.js')
+const Baker = require('../models/baker.js')
 
-// INDEX // Basic READ/GET function and 
+// INDEX // Basic READ/GET function 
 breads.get('/', (req, res) => {
     Bread.find()
         .then(foundBreads => {
@@ -19,7 +20,12 @@ breads.get('/', (req, res) => {
 
 // NEW // GET request since we are getting a form. We are not using POST yet since we are not changing anything in the list, only filling out a form 
 breads.get('/new', (req, res) => {
-    res.render('new')
+    Baker.find()
+        .then(foundBakers => {
+            res.render('new', {
+                bakers: foundBakers
+            })
+        })
 })
 
 // EDIT
