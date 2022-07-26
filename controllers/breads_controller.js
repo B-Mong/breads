@@ -6,21 +6,32 @@ const Bread = require('../models/bread.js')
 const Baker = require('../models/baker.js')
 
 // INDEX // Basic READ/GET function // Bakers are now also display on this page
-breads.get('/', (req, res) => {
-    Baker.find()
-    .then(foundBakers => {
-        Bread.find()
-        .then(foundBreads => {
-            res.render('index',
-                {
-                    breads: foundBreads,
-                    bakers: foundBakers,
-                    title: 'Index Page'
-                }
-            )
-        })
+
+breads.get('/', async (req, res) => {
+    const foundBakers = await Baker.find().lean()
+    const foundBreads = await Bread.find()
+    res.render('index', {
+        breads: foundBreads,
+        bakers: foundBakers,
+        title: 'Index Page'
     })
 })
+
+// breads.get('/', (req, res) => {
+//     Baker.find()
+//     .then(foundBakers => {
+//         Bread.find()
+//         .then(foundBreads => {
+//             res.render('index',
+//                 {
+//                     breads: foundBreads,
+//                     bakers: foundBakers,
+//                     title: 'Index Page'
+//                 }
+//             )
+//         })
+//     })
+// })
 
 // NEW // GET request since we are getting a form. We are not using POST yet since we are not changing anything in the list, only filling out a form 
 breads.get('/new', (req, res) => {
@@ -37,7 +48,7 @@ breads.get('/:id/edit', (req, res) => {
     Baker.find()   // Find all bakers
         .then(foundBakers => {   // Then pass in the bakers along to
             Bread.findById(req.params.id)       // Find all breads
-                .then(foundBread =>{        // Then pass in found breads to the render
+                .then(foundBread => {        // Then pass in found breads to the render
                     res.render('edit', {        // Render the edit.jsx and pass in data of bakers and breads
                         bread: foundBread,
                         bakers: foundBakers
